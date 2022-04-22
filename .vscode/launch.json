@@ -5,17 +5,349 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Using Pre-trained",
+            "name": "Train pix 2 pix - Maps Data",
             "type": "python",
             "request": "launch",
-            "program": "main.py",
+            "program": "/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix/train.py",
+            "args":["--dataroot", "./datasets/maps", "--name", "maps_cyclegan", "--model", "cycle_gan","--gpu_ids","0,1","--batch_size","4","--continue_train","--use_wandb"],
             "console": "integratedTerminal",
-            "args":["--mode","test","--dataset","CelebA","--image_size","128","--c_dim","5",
-                    "--selected_attrs","Black_Hair","Blond_Hair","Brown_Hair","Male","Young",
-                    "--model_save_dir=stargan_celeba_128/models",
-                    "--result_dir=stargan_celeba_128/results",]
+            "cwd":"/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix"
+        },
+        {
+            "name": "Train pix 2 pix - Horse-Zebra",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix/train.py",
+            "args":["--dataroot", "./datasets/horse2zebra", "--name", "horse2zebra_cyclegan", "--model", "cycle_gan",\
+                    "--gpu_ids","0,1","--batch_size","4","--continue_train","--use_wandb"],
+            "console": "integratedTerminal",
+            "cwd":"/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix"
+        },
+        {
+            "name": "Train pix 2 pix - Night-Day",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix/train.py",
+            "args":["--dataroot", "./datasets/night2day", "--name", "night2day_cyclegan", "--model", "cycle_gan",\
+                    "--gpu_ids","0,1","--batch_size","2","--use_wandb","--continue_train","--epoch_count", "195"],
+            "console": "integratedTerminal",
+            "cwd":"/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix"
+        },
+
+        {
+            "name": "Train pix 2 pix - Night-Day - Eval",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix/scripts/eval_cityscapes/evaluate.py",
+            "args":["--cityscapes_dir", "/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix/datasets/night2day", \ 
+                    "--result_dir", "/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix/results/night2day_cyclegan/test_latest/images",\
+                    "--output_dir", "/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix/eval_rslt", "--save_output_images", "1"],
+            "console": "integratedTerminal",
+            "cwd":"/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix/scripts/eval_cityscapes"
+        },
+
+
+        {
+            "name": "StarGAN 1 ",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/msis/Aroona/Codes/PyTorch-GAN/implementations/stargan/stargan.py",
+            "console": "integratedTerminal",
+            "cwd":"/home/msis/Aroona/Codes/PyTorch-GAN/implementations/stargan"
+        },
+
+        
+        {
+            "name": "StarGAN",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix/scripts/eval_cityscapes/evaluate.py",
+            "args":["--cityscapes_dir", "/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix/datasets/night2day", \ 
+                    "--result_dir", "/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix/results/night2day_cyclegan/test_latest/images",\
+                    "--output_dir", "/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix/eval_rslt", "--save_output_images", "1"],
+            "console": "integratedTerminal",
+            "cwd":"/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix/scripts/eval_cityscapes"
+        },
+
+
+        
+        {
+            "name": "Seperate Data into A and B",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix/datasets/seperate_A_and_B.py",
+            "args":["--dataset-path", "./datasets/night2day"],
+            "console": "integratedTerminal",
+            "cwd":"/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix"
+        },
+
+
+        {
+            "name": "Combine Data into A and B",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix/datasets/combine_A_and_B.py",
+            "args":["--foldA", "./datasets/horse2zebra/testA","--foldB", "./datasets/horse2zebra/testB", "--foldAB", "./datasets/horse2zebra/test"],
+            "console": "integratedTerminal",
+            "cwd":"/home/msis/Aroona/Codes/pytorch-CycleGAN-and-pix2pix"
+        },
+
+        
+        {"name": "-------------------------------"},
+        {"name": "------------StarGAN------------"},
+        {"name": "-------------------------------"},
+
+        
+        {"name": "-------------CelebA-------------"},
+       
+        {
+            "name": "- StarGAN train celebA",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/msis/Aroona/Codes/stargan/main.py",
+            "args":["--mode"            , "train", 
+                "--dataset"             , "CelebA", 
+                "--celeba_image_dir"    , "/home/msis/Aroona/Codes/stargan/data/celeba/images",                                              
+                "--attr_path"           , "/home/msis/Aroona/Codes/stargan/data/celeba/list_attr_celeba.txt",                
+                "--image_size"          , "128",  
+                "--c_dim"               , "5", 
+                "--sample_dir"          , "stargan_celebA/samples", 
+                "--log_dir"             , "stargan_celebA/logs", 
+                "--model_save_dir"      , "stargan_celebA/models", 
+                "--result_dir"          , "stargan_celebA/results", 
+                "--selected_attrs" 
+                "Black_Hair", "Blond_Hair", "Brown_Hair", "Male", "Young"],
+                "console": "integratedTerminal",
+            "cwd":"/home/msis/Aroona/Codes/stargan"
+        },
+        
+        
+        {
+            "name": "- StarGAN test celebA",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/msis/Aroona/Codes/stargan/main.py",
+            "args":["--mode"            , "test", 
+                "--dataset"             , "CelebA", 
+                "--celeba_image_dir"    , "/home/msis/Aroona/Codes/stargan/data/celeba/images",                                              
+                "--attr_path"           , "/home/msis/Aroona/Codes/stargan/data/celeba/list_attr_celeba.txt",                
+                "--image_size"          , "128",  
+                "--c_dim"               , "5"  , 
+                "--sample_dir"          , "stargan_celebA_128/samples", 
+                "--log_dir"             , "stargan_celebA_128/logs", 
+                "--model_save_dir"      , "stargan_celebA_128/models", 
+                "--result_dir"          , "stargan_celebA_128/results", 
+                "--selected_attrs" 
+                "Black_Hair", "Blond_Hair", "Brown_Hair", "Male", "Young"],
+                "console": "integratedTerminal",
+                "cwd":"/home/msis/Aroona/Codes/stargan"
+        }    ,
+              
+        
+        {"name": "-----------CompCars-------------"},
+
+
+        {
+            "name": "- StarGAN train Comp Cars",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/msis/Aroona/Codes/stargan/main.py",
+            "args":["--mode"            , "train",                          \
+                "--dataset"             , "CompCars",                       \
+                "--CompCars_image_dir"  , "/data/CompCars_Images",                                              
+                "--attr_path"           , "/home/msis/Aroona/Codes/stargan/data/CompCars/list_attr_CompCars.txt",                
+                "--CompCars_crop_size"  , "1024",                            \ 
+                "--image_size"          , "256",                                   
+                "--batch_size"          , "2",                            \
+                "--sample_dir"          , "data/CompCars/samples",          \
+                "--log_dir"             , "data/CompCars/logs",             \
+                "--model_save_dir"      , "data/CompCars/models",           \
+                "--result_dir"          , "data/CompCars/results",          \
+                "--c_dim"               , "7",                             \
+                "--resume_iters"        , "1320000",                         \
+                "--selected_attrs" \
+                "metallic_black", "blue" ,"silver", "green", "red","yellow", "white"],
+                
+            "console": "integratedTerminal",
+            "cwd":"/home/msis/Aroona/Codes/stargan"
+        },
+
+        {
+            "name": "- StarGAN test Comp Cars",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/msis/Aroona/Codes/stargan/main.py",
+            "args":["--mode"            , "train",                          \
+                "--dataset"             , "CompCars",                       \
+                "--CompCars_image_dir"  , "/home/msis/Aroona/Codes/stargan/data/CompCars/image-test",                                              
+                "--attr_path"           , "/home/msis/Aroona/Codes/stargan/data/CompCars/image-test.txt",                
+                "--CompCars_crop_size"  , "1024",                            \ 
+                "--image_size"          , "256",                                   
+                "--batch_size"          , "2",                            \
+                "--sample_dir"          , "data/CompCars/samples",          \
+                "--log_dir"             , "data/CompCars/logs",             \
+                "--model_save_dir"      , "data/CompCars/models",           \
+                "--result_dir"          , "data/CompCars/results",          \
+                "--c_dim"               , "7",                              \
+                "--selected_attrs" \
+                "metallic_black", "blue" ,"silver", "green", "red","yellow", "white"],
+                
+            "console": "integratedTerminal",
+            "cwd":"/home/msis/Aroona/Codes/stargan"
+        },
+        
+        
+        {"name": "--------------BDD---------------"},
+
+        {
+            "name": "- StarGAN test BDD cropped",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/msis/Aroona/Codes/stargan/main.py",
+            "args":["--mode"            , "test",                           \
+                "--dataset"             , "CompCars",                       \
+                "--CompCars_image_dir"  , "/home/msis/Aroona/Codes/stargan/data/BDD_Val_Cropped6/crops/car",                                              
+                "--attr_path"           , "/home/msis/Aroona/Codes/stargan/data/BDD_Val_Cropped6/crops/car/list.txt",                
+                "--CompCars_crop_size"  , "1024",                            \ 
+                "--image_size"          , "256",                                   
+                "--batch_size"          , "1",                              \
+                "--sample_dir"          , "/home/msis/Aroona/Codes/stargan/data/CompCars/samples",          \
+                "--log_dir"             , "data/CompCars/logs",             \
+                "--model_save_dir"      , "data/CompCars/models",           \
+                "--result_dir"          , "data/BDD_Val_Cropped6/results",          \
+                "--c_dim"               , "7",                             \
+                "--selected_attrs"
+                "metallic_black", "blue" ,"silver", "green", "red","yellow", "white"],
+                "console": "integratedTerminal",
+                "cwd":"/home/msis/Aroona/Codes/stargan"
+        },   
+
+        {
+            "name": "- StarGAN test BDD algo cropped Train",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/msis/Aroona/Codes/stargan/main.py",
+            "args":["--mode"            , "test",                           \
+                "--dataset"             , "CompCars",                       \
+                "--CompCars_image_dir"  , "/home/msis/Aroona/Codes/stargan/data/BDD_Val_Cropped6/algo_cropped/Cropped_Images/BDD_Train",                                              
+                "--attr_path"           , "/home/msis/Aroona/Codes/stargan/data/BDD_Val_Cropped6/algo_cropped/Cropped_Images/BDD_Train/Train_list.txt",                
+                "--CompCars_crop_size"  , "1024",                            \ 
+                "--image_size"          , "256",                                   
+                "--batch_size"          , "1",                              \
+                "--sample_dir"          , "/home/msis/Aroona/Codes/stargan/data/CompCars/samples",          \
+                "--log_dir"             , "data/CompCars/logs",             \
+                "--model_save_dir"      , "data/CompCars/models",           \
+                "--result_dir"          , "/home/msis/Aroona/Codes/stargan/data/BDD_Val_Cropped6/algo_cropped/results",          \
+                "--c_dim"               , "7",                             \
+                "--selected_attrs"
+                "metallic_black", "blue" ,"silver", "green", "red","yellow", "white"],
+                "console": "integratedTerminal",
+                "cwd":"/home/msis/Aroona/Codes/stargan",
+                "justMyCode": false
+        },     
+
+        {
+            "name": "- StarGAN test BDD algo cropped Validation",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/msis/Aroona/Codes/stargan/main.py",
+            "args":["--mode"            , "test",                           \
+                "--dataset"             , "CompCars",                       \
+                "--CompCars_image_dir"  , "/home/msis/Aroona/Codes/stargan/data/BDD_Val_Cropped6/algo_cropped/Cropped_Images/BDD_Val",                                              
+                "--attr_path"           , "/home/msis/Aroona/Codes/stargan/data/BDD_Val_Cropped6/algo_cropped/Cropped_Images/BDD_Val/Val_list.txt",                
+                "--CompCars_crop_size"  , "256",                            \ 
+                "--image_size"          , "256",                                   
+                "--batch_size"          , "1",                              \
+                "--sample_dir"          , "/home/msis/Aroona/Codes/stargan/data/CompCars/samples",          \
+                "--log_dir"             , "data/CompCars/logs",             \
+                "--model_save_dir"      , "data/CompCars/models",           \
+                "--result_dir"          , "/home/msis/Aroona/Codes/stargan/data/BDD_Val_Cropped6/algo_cropped/results",          \
+                "--c_dim"               , "7",                             \
+                "--selected_attrs"
+                "metallic_black", "blue" ,"silver", "green", "red","yellow", "white"],
+                "console": "integratedTerminal",
+                "cwd":"/home/msis/Aroona/Codes/stargan",
+                "justMyCode": false
+        },        
+            
+        
+        {"name": "-----------Hackathon------------"},
+
+        {
+            "name": "- StarGAN test HACKATHON",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/msis/Aroona/Codes/stargan/main.py",
+            "args":["--mode"            , "test",                          \
+                "--dataset"             , "CompCars",                       \
+                "--CompCars_image_dir"  , "/home/msis/Aroona/Codes/stargan/data/HACKATHON/images",                                              
+                "--attr_path"           , "/home/msis/Aroona/Codes/stargan/data/HACKATHON/list_images.txt",                
+                "--CompCars_crop_size"  , "1024",                            \ 
+                "--image_size"          , "256",                                   
+                "--batch_size"          , "1",                            \
+                "--sample_dir"          , "/home/msis/Aroona/Codes/stargan/data/CompCars/samples",          \
+                "--log_dir"             , "data/CompCars/logs",             \
+                "--model_save_dir"      , "data/CompCars/models",           \
+                "--result_dir"          , "data/HACKATHON/results",          \
+                "--c_dim"               , "7",                             \
+                "--selected_attrs" \
+                "metallic_black", "blue" ,"silver", "green", "red","yellow", "white"],
+                "console": "integratedTerminal",
+                "cwd":"/home/msis/Aroona/Codes/stargan"
+        },        
+                
+                
+        { "name": "------CompCars_SVData--------"},
+        
+        {
+            "name": "- StarGAN train CompCars Surv",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/msis/Aroona/Codes/stargan/main.py",
+            "args":["--mode"            , "train",                          
+                "--dataset"             , "CompCars",       
+                "--CompCars_image_dir"  , "/data/CompCars_svData/sv_data/image_1folder",                                              
+                "--attr_path"           , "/data/CompCars_svData/sv_data/color_list_attr.txt",                     
+                "--CompCars_crop_size"  , "1024",                                              
+                "--image_size"          , "512",                                              
+                "--batch_size"          , "2",                            
+                "--sample_dir"          , "data/CompCars_SvData/samples",          
+                "--log_dir"             , "data/CompCars_SvData/logs",             
+                "--model_save_dir"      , "data/CompCars_SvData/models",           
+                "--result_dir"          , "data/CompCars_SvData/results",
+                "--resume_iters"        , "1430000",          
+                "--c_dim"               , "11",                             
+                "--selected_attrs" \
+                "black","blue","brown","champagne","green","purple","red","silver","unrecognized","white","yellow"],
+                "console": "integratedTerminal",
+                "cwd":"/home/msis/Aroona/Codes/stargan"
+            },
+            
+                    
+                    
+        {
+            "name": "- StarGAN test CompCars Surv",
+            "type": "python",
+            "request": "launch",
+            "program": "/home/msis/Aroona/Codes/stargan/main.py",
+            "args":["--mode"            , "test",                          
+                "--dataset"             , "CompCars",                
+                "--CompCars_image_dir"  , "/home/msis/Aroona/Codes/stargan/data/CompCars_SvData/image-test",                                              
+                "--attr_path"           , "/home/msis/Aroona/Codes/stargan/data/CompCars_SvData/image-test",                                              
+                "--CompCars_crop_size"  , "1024",                                              
+                "--image_size"          , "256",                                         
+                "--batch_size"          , "2",                            
+                "--sample_dir"          , "data/CompCars/samples",          
+                "--log_dir"             , "data/CompCars_SvData/logs",             
+                "--model_save_dir"      , "data/CompCars/models",           
+                "--result_dir"          , "data/CompCars_SvData/results",          
+                "--c_dim"               , "11",                             
+                "--selected_attrs" \
+                "black","blue","brown","champagne","green","purple","red","silver","unrecognized","white","yellow"],
+            "console": "integratedTerminal",
+            "cwd":"/home/msis/Aroona/Codes/stargan"
         }
+
+        
     ]
 }
-
-
