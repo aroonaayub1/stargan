@@ -1,0 +1,21 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Using Pre-trained",
+            "type": "python",
+            "request": "launch",
+            "program": "main.py",
+            "console": "integratedTerminal",
+            "args":["--mode","test","--dataset","CelebA","--image_size","128","--c_dim","5",
+                    "--selected_attrs","Black_Hair","Blond_Hair","Brown_Hair","Male","Young",
+                    "--model_save_dir=stargan_celeba_128/models",
+                    "--result_dir=stargan_celeba_128/results",]
+        }
+    ]
+}
+
+
